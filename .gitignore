@@ -1,0 +1,10 @@
+venv
+dataset/archive
+dataset/*
+pycache__/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+imagens_teste
