@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Análise Facial</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Análise Facial</h1>
+    <p>Envie uma foto do seu rosto e receba uma análise de envelhecimento e cuidados com a pele.</p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Analisar Foto</button>
+    </form>
+</div>
+
+</body>
+</html>
