@@ -1,7 +1,5 @@
-numpy
-matplotlib
-tensorflow
-keras
 flask
+tensorflow
 opencv-python-headless
+numpy
 gunicorn
