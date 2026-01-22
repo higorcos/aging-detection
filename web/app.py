@@ -103,16 +103,17 @@ def upload():
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
 
     result_path = os.path.join(RESULT_FOLDER, filename)
-    result_path1 = os.path.join(RESULT_FOLDER1, filename)
+    #result_path1 = os.path.join(RESULT_FOLDER1, filename)
     cv2.imwrite(result_path, img)
  
+   
     return render_template(
-        "result.html",
-        idade=idade,
-        tipo=tipo,
-        recs=recs,
-        image_path=result_path1
-    )
+    "result.html",
+    idade=idade,
+    tipo=tipo,
+    recs=recs,
+    image_path=f"results/{filename}")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
