@@ -1,6 +1,7 @@
-opencv-python
 numpy
 matplotlib
 tensorflow
 keras
 flask
+opencv-python-headless
+gunicorn
