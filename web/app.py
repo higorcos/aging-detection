@@ -5,9 +5,6 @@ import numpy as np
 import tensorflow as tf
 from flask import Flask, render_template, request, redirect, url_for
 
-# ========================
-# CONFIGURAÇÕES GERAIS
-# ========================
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -21,24 +18,15 @@ IMG_SIZE = 96
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULT_FOLDER, exist_ok=True)
 
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["RESULT_FOLDER"] = RESULT_FOLDER
-
-# ========================
-# CARREGAR MODELO
-# ========================
+# ===== Modelo =====
 model = tf.keras.models.load_model(MODEL_PATH)
 
-# ========================
-# DETECTOR DE ROSTO
-# ========================
+# ===== Detector de rosto =====
 face_cascade = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
 
-# ========================
-# FUNÇÕES AUXILIARES
-# ========================
+# ===== Funções =====
 def preprocess_face(face):
     face = cv2.resize(face, (IMG_SIZE, IMG_SIZE))
     face = face / 255.0
@@ -58,9 +46,7 @@ def analisar_envelhecimento(idade):
         return "Envelhecimento avançado. Cuidados dermatológicos contínuos."
 
 
-# ========================
-# ROTAS
-# ========================
+# ===== Rotas =====
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -76,31 +62,36 @@ def analisar():
     if file.filename == "":
         return redirect(url_for("index"))
 
-    # Nome único
     ext = file.filename.split(".")[-1]
     filename = f"{uuid.uuid4()}.{ext}"
     upload_path = os.path.join(UPLOAD_FOLDER, filename)
     file.save(upload_path)
 
-    # Ler imagem
     img = cv2.imread(upload_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
     if len(faces) == 0:
-        return render_template(
-            "result.html",
-            erro="Nenhum rosto detectado.",
-            imagem=None
-        )
+        return render_template("result.html", erro="Nenhum rosto detectado.")
 
-    # Pega o maior rosto
     x, y, w, h = max(faces, key=lambda f: f[2] * f[3])
     face = gray[y:y+h, x:x+w]
 
-    face_inp_
+    face_input = preprocess_face(face)
+    idade_pred = model.predict(face_input)[0][0]
+    idade = int(round(idade_pred))
+
+    dica = analisar_envelhecimento(idade)
+
+    return render_template(
+        "result.html",
+        idade=idade,
+        dica=dica,
+        imagem=f"uploads/{filename}"
+    )
+
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
