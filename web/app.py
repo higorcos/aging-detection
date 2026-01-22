@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "index")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
 RESULT_FOLDER = os.path.join(BASE_DIR, "static", "results")
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "idade_model3.keras")
 
@@ -63,7 +63,7 @@ def analisar_envelhecimento(idade):
 # ========================
 @app.route("/")
 def index():
-    return render_template("upload.html")
+    return render_template("index.html")
 
 
 @app.route("/analisar", methods=["POST"])
@@ -90,7 +90,7 @@ def analisar():
 
     if len(faces) == 0:
         return render_template(
-            "resultado.html",
+            "result.html",
             erro="Nenhum rosto detectado.",
             imagem=None
         )
