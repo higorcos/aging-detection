@@ -4,18 +4,56 @@
     <meta charset="UTF-8">
     <title>Análise Facial</title>
     <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 
 <div class="container">
     <h1>Análise Facial</h1>
-    <p>Envie uma foto do seu rosto e receba uma análise de envelhecimento e cuidados com a pele.</p>
+    <p>Envie uma foto do seu rosto para análise de envelhecimento.</p>
 
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Analisar Foto</button>
+
+        <label class="upload-box" for="imageInput">
+            <input 
+                type="file"
+                id="imageInput"
+                name="image"
+                accept="image/*"
+                hidden
+            >
+
+            <div id="uploadText">
+                📷 Clique ou arraste a foto aqui
+            </div>
+
+            <img id="preview" class="preview-img" hidden>
+        </label>
+
+        <button type="submit" id="submitBtn" disabled>
+            Analisar Foto
+        </button>
+
     </form>
 </div>
+
+<script>
+    const input = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+    const uploadText = document.getElementById("uploadText");
+    const submitBtn = document.getElementById("submitBtn");
+
+    input.addEventListener("change", () => {
+        const file = input.files[0];
+        if (!file) return;
+
+        preview.src = URL.createObjectURL(file);
+        preview.hidden = false;
+        uploadText.style.display = "none";
+        submitBtn.disabled = false;
+    });
+</script>
 
 </body>
 </html>

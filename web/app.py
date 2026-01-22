@@ -19,12 +19,12 @@ RESULT_FOLDER1 = "static/results"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULT_FOLDER, exist_ok=True)
 
-model = tf.keras.models.load_model("models/idade_model.keras")
+model = tf.keras.models.load_model("models/idade_model3.keras")
 
 face_cascade = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
-)
-
+) 
+ 
 # =========================
 # FUNÇÕES DE ANÁLISE
 # =========================
@@ -96,7 +96,7 @@ def upload():
     manchas = analisar_manchas(rosto)
     tipo = analisar_oleosidade(rosto_gray)
     recs = gerar_recomendacoes(rugas, manchas, tipo)
-
+ 
     # Desenhar
     cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
     cv2.putText(img, f"Idade: {idade}", (x, y-10),

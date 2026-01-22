@@ -8,3 +8,5 @@ pycache__/
 __pycache__/
 *.so
 imagens_teste
+web/static/results
+web/static/uploads

@@ -3,6 +3,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+    font-size: 16px;
+}
+
 body {
     margin: 0;
     background: linear-gradient(135deg, #1d2671, #c33764);
@@ -11,21 +15,22 @@ body {
     align-items: center;
     justify-content: center;
     color: #333;
+    padding: 10px;
 }
 
 .container {
     background: #ffffff;
-    width: 100%;
+    width: 92%;
     max-width: 420px;
-    padding: 30px;
+    padding: 22px;
     border-radius: 16px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     text-align: center;
 }
 
 h1 {
-    margin-bottom: 10px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 8px;
     color: #1d2671;
 }
 
@@ -34,9 +39,34 @@ p {
     color: #555;
 }
 
-input[type="file"] {
-    margin: 20px 0;
+.upload-box {
     width: 100%;
+    min-height: 160px;
+    border: 2px dashed #1d2671;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d2671;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 18px 0;
+    transition: background 0.3s;
+    text-align: center;
+    padding: 12px;
+}
+
+.upload-box:hover {
+    background: #f2f4ff;
+}
+
+.preview-img,
+.result-img {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    border-radius: 12px;
 }
 
 button {
@@ -55,10 +85,9 @@ button:hover {
     background: #14205a;
 }
 
-.result-img {
-    width: 100%;
-    border-radius: 12px;
-    margin: 20px 0;
+button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
 }
 
 .badge {
@@ -67,8 +96,8 @@ button:hover {
     color: #fff;
     padding: 6px 12px;
     border-radius: 20px;
-    font-size: 0.9rem;
-    margin: 5px;
+    font-size: 0.85rem;
+    margin: 6px 4px;
 }
 
 ul {
@@ -86,8 +115,18 @@ ul li {
 
 a {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 18px;
     text-decoration: none;
     color: #1d2671;
     font-weight: bold;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .upload-box {
+        min-height: 140px;
+    }
 }
