@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "index")
 RESULT_FOLDER = os.path.join(BASE_DIR, "static", "results")
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "idade_model3.keras")
 
