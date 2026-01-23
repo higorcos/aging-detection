@@ -12,7 +12,8 @@
 <div class="container">
     <h1>Resultado da Análise</h1>
 
-    <img src="/{{ image_path }}" class="result-img">
+    <img src="{{ url_for('static', filename=image_path) }}" class="result-img">
+
 
     <div>
         <span class="badge">Idade: {{ idade }} anos</span>
